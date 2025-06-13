@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <section id="login" class="inicio">
+        <div class="dividir">
+            <h1>REPORTELO YA!</h1>
+            <p>ACCEDE A TU CUENTA</p>
+
+            <form id="formLogin" class="formulario">
+                <div class="campo">
+                    <label for="email">Correo electronico </label>
+                    <input type="email" id="emailLogin" placeholder="ejemplo@gmail.com" required />
+                </div>
+
+                <div class="campo">
+                    <label for="password">Contraseña </label>
+                    <input type="password" id="passwordLogin" placeholder="*****" required />
+                </div>
+
+                <button type="submit">Iniciar Sesion</button>
+            </form>
+
+            <p>¿AÚN NO TIENES CUENTA? <a href="#" id="irRegistro">Registrate aquí</a></p>
+        </div>
+
+        <div class="azul">
+            <img src="images/reportelo-ya.webp" alt="">
+        </div>
+    </section>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            margin-top: 50px;
+            background-image: url(images/slovakia-9-october-2022-traffic-600nw-2592189525.webp);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .inicio {
+            display: flex;
+            justify-content: center;
+            height: 700px;
+            box-sizing: content-box;
+            border: solid rgb(14, 133, 231) 5px;
+            padding: 50px;
+        }
+
+        .dividir {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            width: 50%;
+            background-color: white;
+            
+
+        }
+
+        .formulario {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        label {
+            display: flex;
+            align-self: self-start;
+        }
+
+        .inicio h1 {
+            color: rgb(14, 133, 231);
+        }
+
+        .azul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(14, 133, 231);
+            width: 50%;
+        }
+
+        .azul img {
+            height: 300px;
+        }
+
+        button{
+            padding: 5px;
+            width: 100px;
+               background-color: rgb(14, 133, 231);
+            border: none;
+            cursor: pointer;
+
+        }
+    </style>
+
+
+
+</body>
+
+</html>
