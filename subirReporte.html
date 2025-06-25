@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Subir Reporte - Repórtelo Ya</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f7ff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .contenedor {
+      max-width: 700px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #007BFF;
+    }
+
+    .campo {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contenedor">
+    <h2>Subir Reporte de Infracción</h2>
+    <form id="formReporte">
+      <div class="campo">
+        <label for="foto">Foto o video del incidente:</label>
+        <input type="file" id="foto" accept="image/*,video/*" required />
+      </div>
+
+      <div class="campo">
+        <label for="descripcion">Descripción de la infracción:</label>
+        <textarea id="descripcion" rows="4" placeholder="Ej: El vehículo estaba mal estacionado..." required></textarea>
+      </div>
+
+      <div class="campo">
+        <label for="fecha">Fecha del incidente:</label>
+        <input type="date" id="fecha" required />
+      </div>
+
+      <div class="campo">
+        <label for="hora">Hora del incidente:</label>
+        <input type="time" id="hora" required />
+      </div>
+
+      <div class="campo">
+        <label for="ubicacion">Ubicación (Dirección o coordenadas):</label>
+        <input type="text" id="ubicacion" placeholder="Ej: Calle 10 #5-20, Armenia" required />
+      </div>
+
+      <div class="campo">
+        <label for="placa">Placa del vehículo infractor (opcional):</label>
+        <input type="text" id="placa" placeholder="ABC123 (si es visible)" />
+      </div>
+
+      <button type="submit">Enviar Reporte</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("formReporte").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const foto = document.getElementById("foto").files[0];
+      const descripcion = document.getElementById("descripcion").value;
+      const fecha = document.getElementById("fecha").value;
+      const hora = document.getElementById("hora").value;
+      const ubicacion = document.getElementById("ubicacion").value;
+      const placa = document.getElementById("placa").value;
+
+      // Simulación de envío (puedes reemplazar esto por fetch o AJAX al backend)
+      const reporte = {
+        archivo: foto.name,
+        descripcion,
+        fecha,
+        hora,
+        ubicacion,
+        placa
+      };
+
+      console.log("📤 Reporte enviado:", reporte);
+      alert("✅ ¡Reporte enviado exitosamente!");
+
+      // Reiniciar formulario
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>
