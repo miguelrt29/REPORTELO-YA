@@ -1,151 +1,155 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Registro - REPÓRTELO YA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+      * {
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
 
-        body {
-            margin: 0;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+      body {
+        margin: 0;
+        background-color: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
 
-        .registro-container {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            width: 100%;
-            max-width: 400px;
-        }
+      .registro-container {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        width: 100%;
+        max-width: 400px;
+      }
 
-        #registroForm {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+      #registroForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-        h2 {
-            color: #007BFF;
-            text-align: center;
-            margin-bottom: 30px;
-        }
+      h2 {
+        color: #007bff;
+        text-align: center;
+        margin-bottom: 30px;
+      }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-            align-self: flex-start;
-        }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+        align-self: flex-start;
+      }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
 
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #007BFF;
-            color: #fff;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        transition: 0.3s;
+      }
 
-        button:hover {
-            background-color: #0056b3;
-            cursor: pointer;
-        }
+      button:hover {
+        background-color: #0056b3;
+        cursor: pointer;
+      }
 
-        .login-link {
-            text-align: center;
-            margin-top: 15px;
-        }
+      .login-link {
+        text-align: center;
+        margin-top: 15px;
+      }
 
-        .login-link a {
-            color: #007BFF;
-            text-decoration: none;
-        }
+      .login-link a {
+        color: #007bff;
+        text-decoration: none;
+      }
 
-        .login-link a:hover {
-            text-decoration: underline;
-        }
+      .login-link a:hover {
+        text-decoration: underline;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="registro-container">
-        <h2>REGÍSTRATE</h2>
-        <form id="registroForm">
-            <label for="nombre">Nombre completo</label>
-            <input type="text" id="nombre" required>
+ feature-juan
+      <h2>REGÍSTRATE</h2>
+      <form id="registroForm">
+        <label for="nombre">Nombre completo</label>
+        <input type="text" id="nombre" required />
 
-            <label for="correo">Correo electrónico</label>
-            <input type="email" id="correo" required>
+        <label for="correo">Correo electrónico</label>
+        <input type="email" id="correo" required />
 
-            <label for="contrasena">Contraseña</label>
-            <input type="password" id="contrasena" required>
+        <label for="contrasena">Contraseña</label>
+        <input type="password" id="contrasena" required />
 
-            <label for="rol">Rol</label>
-            <select id="rol" required>
-                <option value="">Selecciona un rol</option>
-                <option value="ciudadano">Ciudadano</option>
-                <option value="agente">Agente de Tránsito</option>
-                <option value="administrador">Administrador</option>
-            </select>
+        <label for="rol">Rol</label>
+        <select id="rol" required>
+          <option value="">Selecciona un rol</option>
+          <option value="ciudadano">Ciudadano</option>
+          <option value="agente">Agente de Tránsito</option>
+          <option value="administrador">Administrador</option>
+        </select>
 
-            <button type="submit">Crear cuenta</button>
-        </form>
+        <button type="submit">Crear cuenta</button>
+      </form>
 
-        <div class="login-link">
-            ¿Ya tienes una cuenta? <a href="index.html">Inicia sesión</a>
-        </div>
+      <div class="login-link">
+        ¿Ya tienes una cuenta? <a href="login.html">Inicia sesión</a>
+      </div>
+
+     main
     </div>
 
     <script>
-        document.getElementById("registroForm").addEventListener("submit", function (e) {
-            e.preventDefault();
+      document
+        .getElementById("registroForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
 
-            const nombre = document.getElementById("nombre").value;
-            const correo = document.getElementById("correo").value;
-            const contrasena = document.getElementById("contrasena").value;
-            const rol = document.getElementById("rol").value;
+          const nombre = document.getElementById("nombre").value;
+          const correo = document.getElementById("correo").value;
+          const contrasena = document.getElementById("contrasena").value;
+          const rol = document.getElementById("rol").value;
 
-            const nuevoUsuario = {
-                nombre,
-                correo,
-                contrasena,
-                rol
-            };
+          const nuevoUsuario = {
+            nombre,
+            correo,
+            contrasena,
+            rol,
+          };
 
-            const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-            usuarios.push(nuevoUsuario);
-            localStorage.setItem("usuarios", JSON.stringify(usuarios));
+          const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+          usuarios.push(nuevoUsuario);
+          localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-            alert("✅ Usuario registrado correctamente");
-            window.location.href = "login.html";
+          alert("✅ Usuario registrado correctamente");
+          window.location.href = "login.html";
         });
     </script>
-
-</body>
-
+  </body>
 </html>
