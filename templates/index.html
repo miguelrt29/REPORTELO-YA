@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Reportelo Ya</title>
+</head>
+<body>
+    <div class="content-wrapper">
+    <div class="navbar">
+        <div class="logo"><img src="assets/Gemini_Generated_Image_lwmq2ylwmq2ylwmq.webp"alt="logo"></div>
+        <div class="menu-and-logo">
+            <div class="menu-buttons-group">
+            <div class="menu-item-container">
+                <a href="#products" class="menu-item active">
+                    Products <i class='bx bx-chevron-down'></i>
+                </a> 
+                <div class="dropdown">
+                    <div class="dropdown-section">
+                        <h4>DX Platform</h4>
+                        <p>Previews: Helping teams ship 6x faster</p>
+                        <p>AI: Powering breakthroughs</p>
+                    </div>
+                    <div class="dropdown-section">
+                        <h4>Managed Infrastructure</h4>
+                        <p>Rendering: Fast, scalable, and reliable</p>
+                        <p>Observability: Trace every step</p>
+                        <p>Security: Scale without compromising</p>
+                    </div>
+                    <div class="dropdown-section">
+                        <h4>Open Source</h4>
+                        <p>Next.js: The native Next.js platform</p>
+                        <p>TurboRepo: Speed with Enterprise scale</p>
+                        <p>AI SDK: The AI Toolkit for TypeScript</p>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item-container">
+                <a href="#solutions" class="menu-item">
+                    Solutions <i class='bx bx-chevron-down'></i>
+                </a>
+                <div class="dropdown">
+                    <div class="dropdown-section">
+                        <h4>Solution 1</h4>
+                        <p>Solution details 1</p>
+                    </div>
+                    <div class="dropdown-section">
+                        <h4>Solution 2</h4>
+                        <p>Solution details 2</p>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item-container">
+                <a href="#resources" class="menu-item">
+                    Resources <i class='bx bx-chevron-down'></i>
+                </a>
+                <div class="dropdown">
+                    <div class="dropdown-section">
+                        <h4>Resource 1</h4>
+                        <p>Resource details 1</p>
+                    </div>
+                    <div class="dropdown-section">
+                        <h4>Resource 2</h4>
+                        <p>Resource details 2</p>
+                    </div>
+                </div>
+            </div>            
+            <a href="#enterprise" class="menu-item">Enterprise</a>
+            <a href="#docs" class="menu-item">Docs</a>
+            <a href="#pricing" class="menu-item">Pricing</a>
+        </div>
+    </div>
+        <div class="buttons">
+            <a href="login.html" class="button button-login" target="_self">Log In</a>
+            <a href="" class="button button-login" target="_blank">Contact</a>
+            <a href="" class="button button-signup" target="_blank">Sign Up</a>
+            <button id="sidebarToggle" class="toggle-btn"><i class="fas fa-bars"></i></button>
+        </div>
+    <nav class="sidebar">
+        <button title="Salir"  id="closeSidebar" class="close-btn"><i class="fas fa-times"></i></button>
+        <div class="container">
+                <img src="assets/reportelo.png" alt="Avatar 1" class="avatar">
+                <button>
+                    <i class='bx bx-pencil'></i>  Editar
+                  </button>                  
+            <ul class="menu-list">
+                <li><i class="fas fa-home"></i> Inicio</li>
+                <li><i class="fas fa-user"></i> Perfil</li>
+                <li><i class="fas fa-cog"></i> Configuración</li>
+                <li><i class="fas fa-envelope"></i> Mensajes</li>
+                <li><i class="fas fa-sign-out-alt"></i> Salir</li>
+            </ul>
+                <p>&copy; 2025 Reportelo Ya.</p>
+        </div>
+    </nav>
+    <div id="overlay" class="overlay"></div>
+    </div>
+    <header class="interfaz">
+        <h1>"La seguridad vial empieza contigo. <br> 
+            Reporta, participa, mejora tu ciudad."</h1>
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Buscar...">
+            <i class="fas fa-search search-icon"></i>
+        </div>        
+    </header>
+    <div class="container">
+    <div class="title">Módulos y Servicios</div>
+    <div class="modules">
+        
+        <a href="subirReporte.html" class="module-link">
+            <div class="module">
+                <div class="icon">
+                    <div class="layer">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <i class="bx bx-camera"></i>
+                </div>
+                <div class="text">Foto Multas</div>
+            </div>
+        </a>
+
+        <a href="multas.html" class="module-link">
+            <div class="module">
+                <div class="icon">
+                    <div class="layer">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <i class="bx bx-file"></i>
+                </div>
+                <div class="text">Multas</div>
+            </div>
+        </a>
+
+        <a href="pico-y-placa.html" class="module-link">
+            <div class="module">
+                <div class="icon">
+                    <div class="layer">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <i class="bx bx-car"></i>
+                </div>
+                <div class="text">Consulta del <br>Pico y Placa</div>
+            </div>
+        </a>
+
+        <a href="parkin.html" class="module-link">
+            <div class="module">
+                <div class="icon">
+                    <div class="layer">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <span class="bx" style="font-size: 24px; font-weight: bold;">PAR</span>
+                </div>
+                <div class="text">Localización de <br> Parqueaderos</div>
+            </div>
+        </a>
+
+    </div>
+</div>
+<style>
+  #chatbotToggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #3498db;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    color: white;
+    font-size: 28px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #chatbotMini {
+    display: none;
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 340px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    font-family: 'Segoe UI', sans-serif;
+    z-index: 9999;
+    overflow: hidden;
+    max-height: 440px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #chatHeader {
+    background: #3498db;
+    color: white;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #chatHeader span {
+    font-weight: bold;
+  }
+
+  #chatHeader button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  #chatMessages {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background: #f9f9f9;
+  }
+
+  .msg {
+    max-width: 80%;
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.4;
+    white-space: pre-wrap;
+  }
+
+  .user {
+    background: #dff0fe;
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+    text-align: right;
+  }
+
+  .bot {
+    background: #ecf0f1;
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
+  }
+
+  #chatInput {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background: #fff;
+  }
+
+  #miniInput {
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 8px;
+    font-size: 14px;
+    resize: none;
+    height: 40px;
+  }
+
+  #sendBtn {
+    background: #3498db;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    width: 40px;
+    height: 40px;
+    margin-left: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #miniLoader {
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+    padding: 5px 0;
+    display: none;
+  }
+</style>
+
+
+<button id="chatbotToggle">🤖</button>
+
+
+<div id="chatbotMini">
+  <div id="chatHeader">
+    <span>Robotransit</span>
+    <button onclick="toggleChat()">×</button>
+  </div>
+  <div id="chatMessages"></div>
+  <div id="miniLoader">⏳ Pensando...</div>
+  <div id="chatInput">
+    <textarea id="miniInput" placeholder="Escribe tu consulta..."></textarea>
+    <button id="sendBtn" onclick="consultarChatbot()"><i>➤</i></button>
+  </div>
+</div>
+
+<script>
+  const toggleBtn = document.getElementById("chatbotToggle");
+  const chatbotBox = document.getElementById("chatbotMini");
+  const chatMessages = document.getElementById("chatMessages");
+  const loader = document.getElementById("miniLoader");
+  const inputElem = document.getElementById("miniInput");
+
+  toggleBtn.addEventListener("click", () => {
+    chatbotBox.style.display = "flex";
+    toggleBtn.style.display = "none";
+  });
+
+  function toggleChat() {
+    chatbotBox.style.display = "none";
+    toggleBtn.style.display = "flex";
+  }
+
+  function agregarMensaje(texto, tipo) {
+    const msg = document.createElement("div");
+    msg.classList.add("msg", tipo);
+    msg.innerText = texto;
+    chatMessages.appendChild(msg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  inputElem.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      consultarChatbot();
+    }
+  });
+
+  async function consultarChatbot() {
+    const texto = inputElem.value.trim();
+    if (!texto) return;
+
+    agregarMensaje(texto, "user");
+    inputElem.value = "";
+    loader.style.display = "block";
+
+    const saludo = texto.toLowerCase();
+    const saludos = ["hola", "buenas", "buenos días", "buenas tardes"];
+    if (saludos.some(s => saludo.includes(s))) {
+      loader.style.display = "none";
+      agregarMensaje(`👋 ¡Hola, soy Robotransit! Me han entrenado para resolver consultas relacionadas con multas y fotodetecciones.
+
+¿Cómo te puedo ayudar hoy? Te sugiero algunos temas frecuentes, ¡pero también puedes preguntarme muchas cosas más!
+
+⚠️ ¡Tu seguridad es lo primero!.`, "bot");
+      return;
+    }
+
+    try {
+      const apiKey = "AIzaSyBGAppOM-QkC6vUWMPhrkyXAXOtSmdAzlI";
+      const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+      const body = {
+        contents: [{
+          parts: [{
+            text: `Eres Robotransit, un asistente especializado en tránsito. Responde de forma clara y útil a esta consulta:\n${texto}`
+          }]
+        }]
+      };
+
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
+
+      loader.style.display = "none";
+      const data = await res.json();
+      const respuesta = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      agregarMensaje(respuesta || "No se pudo obtener respuesta.", "bot");
+
+    } catch (error) {
+      loader.style.display = "none";
+      agregarMensaje("Error al conectar con la IA.", "bot");
+      console.error(error);
+    }
+  }
+</script>
+
+    <script src="src/index.js"></script>
+</body>
+</html>

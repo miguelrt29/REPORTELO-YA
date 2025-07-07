@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Agente de Tránsito</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --card-bg: #ffffff;
+      --sidebar-bg: #ffffff;
+      --primary: #2563eb;
+      --text-main: #1f2937;
+      --text-light: #6b7280;
+      --border: #e5e7eb;
+      --hover: #f3f4f6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      background-color: var(--bg);
+      color: var(--text-main);
+    }
+
+    .sidebar {
+      width: 260px;
+      background-color: var(--sidebar-bg);
+      padding: 30px 20px;
+      border-right: 1px solid var(--border);
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 1.5em;
+      margin-bottom: 30px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sidebar ul li a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 15px;
+      border-radius: 8px;
+      transition: background 0.3s;
+      cursor: pointer;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .sidebar ul li:hover {
+      background-color: var(--hover);
+    }
+
+    .sidebar ul li i {
+      font-size: 18px;
+      color: var(--primary);
+    }
+
+    .main {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .header {
+      background-color: var(--card-bg);
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h1 {
+      font-size: 24px;
+    }
+
+    .header input[type="text"] {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      outline: none;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: var(--primary);
+      font-size: 18px;
+    }
+
+    .card p {
+      color: var(--text-light);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    table, th, td {
+      border: 1px solid var(--border);
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: var(--hover);
+    }
+
+    .alert {
+      background-color: #fee2e2;
+      color: #991b1b;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #fecaca;
+    }
+
+    canvas {
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Agente de Tránsito</h2>
+    <ul>
+      <li><a href="index.html"><i class='bx bx-home'></i> Inicio</a></li>
+      <li><a href="reportar.html"><i class='bx bx-alarm'></i> Reportar incidente</a></li>
+      <li><a href="infracciones.html"><i class='bx bx-traffic-cone'></i> Ver infracciones</a></li>
+      <li><a href="solicitudes.html"><i class='bx bx-task'></i> Solicitudes</a></li>
+      <li><a href="estadisticas.html"><i class='bx bx-bar-chart'></i> Estadísticas</a></li>
+      <li><a href="configuraciones.html"><i class='bx bx-cog'></i> Configuraciones</a></li>
+      <li><a href="index.html"><i class='bx bx-log-out'></i> Salir</a></li>
+    </ul>
+  </div>
+
+  <div class="main">
+    <div class="header">
+      <h1>Panel de Control del Agente</h1>
+      <input type="text" placeholder="Buscar...">
+    </div>
+
+    <div class="alert">
+      ⚠️ Alerta: hay 3 incidentes sin atender registrados en la última hora.
+    </div>
+
+    <div class="content">
+      <div class="card">
+        <h3>Incidentes reportados</h3>
+        <p>24 en las últimas 24 horas</p>
+      </div>
+      <div class="card">
+        <h3>Infracciones asignadas</h3>
+        <p>12 pendientes de validación</p>
+      </div>
+      <div class="card">
+        <h3>Solicitudes de ciudadanos</h3>
+        <p>5 nuevas solicitudes</p>
+      </div>
+      <div class="card">
+        <h3>Zona actual</h3>
+        <p>Centro - Calle 10 con Av. 6</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Gráfico de Incidentes</h3>
+      <canvas id="incidentChart"></canvas>
+    </div>
+
+    <div class="card">
+      <h3>Tabla de infracciones recientes</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Fecha</th>
+            <th>Tipo</th>
+            <th>Agente</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>03/07/2025</td><td>Velocidad</td><td>Gómez</td><td>Pendiente</td></tr>
+          <tr><td>2</td><td>03/07/2025</td><td>Semáforo</td><td>López</td><td>Validado</td></tr>
+          <tr><td>3</td><td>02/07/2025</td><td>Parqueo indebido</td><td>Martínez</td><td>Pendiente</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('incidentChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
+        datasets: [{
+          label: 'Incidentes',
+          data: [12, 19, 8, 15, 10, 7, 13],
+          backgroundColor: 'rgba(37, 99, 235, 0.2)',
+          borderColor: 'rgba(37, 99, 235, 1)',
+          borderWidth: 2,
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

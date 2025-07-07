@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario de Reporte Mejorado</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f2f5;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 960px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+      padding: 30px;
+    }
+
+    .form-label {
+      font-weight: 600;
+    }
+
+    #preview {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 10px;
+    }
+
+    #preview img, #preview video {
+      max-width: 200px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .preview-item {
+      position: relative;
+      display: inline-block;
+    }
+
+    .remove-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: rgba(255, 0, 0, 0.8);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    #map {
+      height: 300px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .small-popup {
+      width: 300px !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="text-center text-primary mb-4">Reporte de Infracción</h2>
+    <form id="formReporte">
+      <div class="mb-3">
+        <label for="archivo" class="form-label">Foto o video del incidente (máximo 5):</label>
+        <input type="file" id="archivo" accept="image/*,video/*" class="form-control" multiple required />
+        <div id="preview" class="mt-3"></div>
+      </div>
+
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción:</label>
+        <div class="input-group">
+          <textarea id="descripcion" class="form-control" rows="4" required></textarea>
+          <button id="microfonoBtn" class="btn btn-outline-secondary" type="button">🎙️</button>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <label for="fecha" class="form-label">Fecha:</label>
+          <input type="date" id="fecha" class="form-control" required onclick="this.showPicker()" />
+        </div>
+        <div class="col">
+          <label for="hora" class="form-label">Hora:</label>
+          <input type="time" id="hora" class="form-control" required onclick="this.showPicker()" />
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Ubicación:</label>
+        <button type="button" class="btn btn-sm btn-outline-primary mb-2" onclick="obtenerUbicacion()">Obtener mi ubicación</button>
+        <input type="text" id="direccion" placeholder="Dirección aproximada" class="form-control mb-2" />
+        <input type="text" id="coordenadas" placeholder="Latitud, Longitud" class="form-control" />
+        <div id="map"></div>
+      </div>
+
+      <div class="mb-3">
+        <label for="placa" class="form-label">Placa del vehículo (opcional):</label>
+        <input type="text" id="placa" class="form-control" />
+      </div>
+
+      <button type="submit" class="btn btn-primary">Enviar Reporte</button>
+    </form>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@v2.1.5/dist/tesseract.min.js"></script>
+  <script>
+    let map, marker, recognition;
+    let recognitionRunning = false;
+    let fileList = [];
+
+    function obtenerUbicacion() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((pos) => {
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+          document.getElementById("coordenadas").value = `${lat}, ${lng}`;
+
+          if (!map) {
+            map = L.map("map").setView([lat, lng], 16);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              attribution: 'Map data © OpenStreetMap contributors'
+            }).addTo(map);
+          } else {
+            map.setView([lat, lng], 16);
+          }
+
+          if (marker) {
+            marker.setLatLng([lat, lng]);
+          } else {
+            marker = L.marker([lat, lng]).addTo(map);
+          }
+
+          fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`)
+            .then(res => res.json())
+            .then(data => {
+              document.getElementById("direccion").value = data.display_name || "Ubicación no encontrada";
+            });
+        });
+      } else {
+        alert("Geolocalización no disponible en este navegador.");
+      }
+    }
+
+    document.getElementById("archivo").addEventListener("change", function () {
+      const preview = document.getElementById("preview");
+      const input = document.getElementById("archivo");
+      const newFiles = Array.from(input.files);
+
+      fileList = fileList.concat(newFiles).slice(0, 5);
+
+      const dt = new DataTransfer();
+      fileList.forEach(file => dt.items.add(file));
+      input.files = dt.files;
+
+      preview.innerHTML = "";
+      fileList.forEach((file, index) => {
+        const div = document.createElement("div");
+        div.className = "preview-item me-2 mb-2";
+
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "×";
+        removeBtn.className = "remove-btn";
+        removeBtn.onclick = () => {
+          fileList.splice(index, 1);
+          const newDT = new DataTransfer();
+          fileList.forEach(f => newDT.items.add(f));
+          input.files = newDT.files;
+          mostrarPrevisualizaciones();
+        };
+
+        if (file.type.startsWith("image")) {
+          const img = document.createElement("img");
+          img.src = URL.createObjectURL(file);
+          img.onclick = () => window.open(img.src, '_blank');
+          div.appendChild(img);
+
+          Tesseract.recognize(img.src, 'eng', { logger: m => console.log(m) })
+            .then(({ data: { text } }) => {
+              const matches = text.match(/[A-Z]{3}[- ]?\d{3}/);
+              if (matches && matches[0]) {
+                document.getElementById("placa").value = matches[0].replace(/[- ]/, '');
+              }
+            });
+
+        } else if (file.type.startsWith("video")) {
+          const video = document.createElement("video");
+          video.src = URL.createObjectURL(file);
+          video.controls = true;
+          div.appendChild(video);
+        }
+
+        div.appendChild(removeBtn);
+        preview.appendChild(div);
+      });
+    });
+
+    function mostrarPrevisualizaciones() {
+      const preview = document.getElementById("preview");
+      const input = document.getElementById("archivo");
+      const dt = new DataTransfer();
+      preview.innerHTML = "";
+
+      fileList.forEach((file, index) => {
+        dt.items.add(file);
+        const div = document.createElement("div");
+        div.className = "preview-item me-2 mb-2";
+
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "×";
+        removeBtn.className = "remove-btn";
+        removeBtn.onclick = () => {
+          fileList.splice(index, 1);
+          mostrarPrevisualizaciones();
+        };
+
+        if (file.type.startsWith("image")) {
+          const img = document.createElement("img");
+          img.src = URL.createObjectURL(file);
+          img.onclick = () => window.open(img.src, '_blank');
+          div.appendChild(img);
+        } else if (file.type.startsWith("video")) {
+          const video = document.createElement("video");
+          video.src = URL.createObjectURL(file);
+          video.controls = true;
+          div.appendChild(video);
+        }
+
+        div.appendChild(removeBtn);
+        preview.appendChild(div);
+      });
+
+      input.files = dt.files;
+    }
+
+    document.getElementById("microfonoBtn").addEventListener("click", function () {
+      const descripcion = document.getElementById("descripcion");
+      if ('webkitSpeechRecognition' in window) {
+        if (!recognition) {
+          recognition = new webkitSpeechRecognition();
+          recognition.lang = 'es-ES';
+          recognition.continuous = true;
+          recognition.interimResults = false;
+          recognition.onresult = (event) => {
+            descripcion.value += event.results[event.resultIndex][0].transcript + " ";
+          };
+          recognition.onerror = (event) => {
+            alert("Error en el reconocimiento de voz: " + event.error);
+          };
+          recognition.onend = () => recognitionRunning = false;
+        }
+
+        if (recognitionRunning) {
+          recognition.stop();
+          recognitionRunning = false;
+        } else {
+          recognition.start();
+          recognitionRunning = true;
+        }
+      } else {
+        alert("El reconocimiento de voz no está disponible en este navegador.");
+      }
+    });
+
+    document.getElementById("formReporte").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      Swal.fire({
+        icon: 'success',
+        title: '¡Reporte enviado!',
+        text: 'Tu reporte ha sido registrado exitosamente.',
+        confirmButtonText: 'OK',
+        customClass: {
+          popup: 'small-popup'
+        },
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showClass: {
+          popup: 'swal2-show animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'swal2-hide animate__animated animate__fadeOutUp'
+        }
+      }).then(() => {
+        window.location.href = "index.html";
+      });
+
+      this.reset();
+      document.getElementById("preview").innerHTML = "";
+      fileList = [];
+      if (map && marker) {
+        marker.remove();
+        marker = null;
+      }
+    });
+  </script>
+</body>
+</html>

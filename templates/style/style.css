@@ -1,0 +1,477 @@
+* {
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden; 
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.interfaz {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: 
+        linear-gradient(rgba(60, 60, 60, 0.4), rgba(60, 60, 60, 0.4)),
+        url('../assets/effefq (1).png') no-repeat center center/cover;
+    color: white;
+    height: 750px;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    padding: 0 20px;
+    overflow: hidden;
+}
+
+.interfaz h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 38px;
+    width: 100%;
+    color: white; 
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 30px 20px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    margin: 40px auto;
+    transform: translateY(-50px);
+}
+
+
+.menu-toggle {
+    position: absolute;
+    top: 20px;
+    right: -50px;
+    background: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 25;
+}
+
+.social-icons {
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    gap: 15px;
+}
+.social-icons a {
+    color: white;
+    font-size: 20px;
+    transition: 0.3s;
+}
+.social-icons a:hover {
+    color: #1e90ff;
+}
+
+.hero {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.hero p {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+
+.navbar {
+    display: flex;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    align-items: center;
+    gap: 32px;
+    padding: 0 24px;
+    background-color: white;
+    border-bottom: 4px solid; 
+    border-image: linear-gradient(to right, #FFD700 33.33%, #0033A0 33.33% 66.66%, #CE1126 66.66%) 1;
+    z-index: 1002;
+}
+
+.logo {
+    width: 70px;
+}
+
+.logo img {
+    max-width: 100%;
+    border-radius: 47%;
+    cursor: pointer;
+}
+
+.menu-and-logo {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.menu-buttons-group {
+    display: flex;
+    gap: 0;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(119, 116, 116);
+    font-size: 14px;
+    padding: 6px 12px;
+}
+
+.menu-item.active,
+.menu-item:hover {
+    background: rgb(237, 234, 234);
+    color: black;
+    border-radius: 20px;
+}
+
+.menu-item i {
+    margin-left: 4px;
+    transition: transform 0.4s ease;
+}
+
+.menu-item:hover i {
+    transform: rotate(180deg);
+}
+
+.menu-item-container {
+    position: relative;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 250px;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 26px;
+    border-radius: 8px;
+    z-index: 100;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.menu-item-container:hover .dropdown {
+    visibility: visible;
+    opacity: 1;
+}
+
+.dropdown-section {
+    margin-bottom: 10px;
+}
+
+.dropdown-section h4 {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.dropdown-section p {
+    font-size: 0.9em;
+    color: #666;
+    margin: 2px 0;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.button {
+    border: 1px solid #bbb7b7;
+    border-radius: 8px;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.button-login {
+    color: #333;
+    background-color: transparent;
+}
+
+.button-login:hover {
+    background: rgb(220, 217, 217);
+}
+
+.button-signup {
+    color: #fff;
+    background-color: black;
+}
+
+.button-signup:hover {
+    background: rgb(53, 50, 50);
+}
+
+.sidebar {
+    position: fixed;
+    top: 0; 
+    right: -250px;
+    width: 250px;
+    height: calc(100% - 0px);
+    background-color: white;
+    color: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: right 0.3s ease;
+    z-index: 1004;
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.toggle-btn {
+    background-color: transparent;
+    color: rgb(100, 99, 99);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.container ul li {
+    list-style: none;
+
+}
+
+.container p {
+    color:  black;
+    font-size: 13px;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 10px 0;
+    cursor: pointer;
+  }
+  
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); 
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 999;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.close-btn {
+    background-color: transparent;
+    border: none;
+    color: black;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.search-container {
+    position: relative;
+    width: 500px; 
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    overflow: hidden;
+    background: white;
+    display: flex;
+    align-items: center;
+    transform: translateY(-50px);
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-icon {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none; 
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+  
+.menu-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.3s ease;
+}
+  
+.menu-list li i {
+    color: #4a90e2;
+}
+  
+.menu-list li:hover {
+    color: #4a90e2;
+    transform: translateX(5px);
+}
+
+button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 5px;
+    background-color: white;
+    color: #333;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+i.bx {
+    font-size: 17px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    background: transparent;
+    padding: 30px;
+    text-align: center;
+    height: 700px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #c8ff3d;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.modules {
+    display: flex;
+    gap: 15px;
+}
+
+.modules a {
+    text-decoration: none;
+    color: black;
+}
+
+.icon {
+    width: 300px;
+    height: 200px;
+    background: transparent;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.icon i {
+    font-size: 50px;
+    color: black;
+}
+
+.icon:hover {
+    transform: rotate(-35deg) skew(20deg);
+}
+
+.layer {
+    width: 160px;
+    height: 160px;
+    position: absolute;
+}
+
+.layer span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    border: 5px solid black;
+    transition: all 0.3s;
+}
+
+.icon:hover .layer span:nth-child(1) { opacity: 0.2; }
+.icon:hover .layer span:nth-child(2) { opacity: 0.4; transform: translate(5px, -5px); }
+.icon:hover .layer span:nth-child(3) { opacity: 0.6; transform: translate(10px, -10px); }
+.icon:hover .layer span:nth-child(4) { opacity: 0.8; transform: translate(15px, -15px); }
+.icon:hover .layer span:nth-child(5) { opacity: 1; transform: translate(20px, -20px); }
