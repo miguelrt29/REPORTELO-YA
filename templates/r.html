@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Recuperar Contraseña</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(to bottom right, #ffffff, #e0f2ff);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .reset-container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        width: 380px;
+        height: auto;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #007BFF;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+        box-sizing: border-box;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #4ca0c7;
+      }
+
+      p {
+        text-align: center;
+        font-size: 14px;
+      }
+
+      .error {
+        color: red;
+        font-size: 14px;
+        display: none;
+        margin-top: -5px;
+        margin-bottom: 10px;
+      }
+
+      .success {
+        color: rgb(60, 83, 216);
+        font-size: 14px;
+        display: none;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reset-container">
+      <h2>RECUPERAR CONTRASEÑA</h2>
+      <form id="recoverForm">
+        <input
+          type="email"
+          id="email"
+          placeholder="Correo electrónico"
+          required
+        />
+
+        <p>Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña.</p>
+
+        <div class="error" id="errorMsg">El correo no es válido o no está registrado.</div>
+        <div class="success" id="successMsg">Te hemos enviado un enlace de recuperación.</div>
+
+        <button type="submit">Enviar enlace</button>
+      </form>
+    </div>
+
+   <script>
+  const form = document.getElementById("recoverForm");
+  const email = document.getElementById("email");
+  const errorMsg = document.getElementById("errorMsg");
+  const successMsg = document.getElementById("successMsg");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    if (email.value.includes("@") && email.value.includes(".")) {
+      errorMsg.style.display = "none";
+
+      try {
+        const response = await fetch("http://localhost:3000/api/enviar-recuperacion", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ correo: email.value })
+        });
+
+        if (response.ok) {
+          successMsg.style.display = "block";
+        } else {
+          throw new Error("Fallo en el envío");
+        }
+      } catch (error) {
+        errorMsg.textContent = "Error al enviar el correo.";
+        errorMsg.style.display = "block";
+      }
+    } else {
+      successMsg.style.display = "none";
+      errorMsg.textContent = "El correo no es válido.";
+      errorMsg.style.display = "block";
+    }
+  });
+</script>
+
+  </body>
+</html>
